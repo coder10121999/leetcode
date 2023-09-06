@@ -43,18 +43,24 @@ public:
     {
            // Your code here
         Node* temp = head;
-        int len = 0;
+        Node* pt1 = temp;
+        Node* pt2 = NULL;
         while(temp!=NULL) {
-            len++;
+            n--;
+            if(n==0) {
+                pt2 = temp;
+                break;
+            }
             temp = temp->next;
         }
-        if(n > len) return -1;
-        temp = head;
-        while(len != n) {
-            temp = temp->next;
-            len--;
+        if(n > 0) return -1;
+        while(pt2 != NULL) {
+            
+            if(pt2->next == NULL) return pt1->data;
+            
+            pt2 = pt2->next;
+            pt1 = pt1->next;
         }
-        return temp->data;
     }
 };
 
