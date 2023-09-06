@@ -33,29 +33,25 @@ int main() {
 // Function to reverse first k elements of a queue.
 queue<int> modifyQueue(queue<int> q, int k) {
     // add code here.
-    stack<int> qu;
-    queue<int> st;
+    int n = q.size();
+    int left = n-k;
+    stack<int> st;
     while(!q.empty()) {
         if(k>0) {
-            qu.push(q.front());
-        } else {
             st.push(q.front());
+        } else {
+            break;
         }
         k--;
         q.pop();
     }
-    // while(!qu.empty()) {
-    //     cout<<qu.front()<<" ";
-    //     qu.pop();
-    // }
-    // cout<<"\n";
-    while(!qu.empty()) {
-        q.push(qu.top());
-        qu.pop();
-    }
     while(!st.empty()) {
-        q.push(st.front());
+        q.push(st.top());
         st.pop();
+    }
+    while(left--) {
+        q.push(q.front());
+        q.pop();
     }
     return q;
 }
