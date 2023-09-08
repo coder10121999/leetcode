@@ -98,29 +98,19 @@ class Solution
 {
     private:
     int ans = 0;
-    int total = 0;
     int x = 0;
     
-    void inOrderSize(Node* root) {
-        if(root->left != NULL)
-        inOrderSize(root->left);
-        total++;
-        if(root->right != NULL)
-        inOrderSize(root->right);
-    }
-    
-    void inOrder(Node* root, int K) {
-        if(root->left != NULL)
-        inOrder(root->left, K);
-        x++;
-        // cout<<root->data<<" "<<x<<"\n";
-        
-        
-        if(x == total-K+1) ans = root->data;
-        
-        
+    int inOrder(Node* root, int K) {
         if(root->right != NULL)
         inOrder(root->right, K);
+        x++;
+        // cout<<root->data<<" "<<x<<"\n";
+        if(x == K) {
+            ans = root->data;
+        }
+        
+        if(root->left != NULL)
+        inOrder(root->left, K);
     }
     
     public:
@@ -128,7 +118,6 @@ class Solution
     int kthLargest(Node *root, int K)
     {
         //Your code here
-        inOrderSize(root);
         // cout<<total<<"\n";
         inOrder(root,K);
         return ans;
