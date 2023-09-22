@@ -12,40 +12,19 @@ class Solution
     int longestSubsequence(int n, int a[])
     {
        // your code here
-       vector<int> arr;
-       arr.push_back(a[0]);
+       vector<int> vec;
+       vec.push_back(a[0]);
+       int ans = 1;
        for(int i=1;i<n;i++) {
-           int num = a[i];
-        //   cout<<"To add:"<<num<<"\n";
-        //   for(int k=0;k<arr.size();k++) {
-        //       cout<<arr[k]<<" ";
-        //   }
-        //   cout<<"\n";
-           if(a[i]>arr.back()) {
-               arr.push_back(a[i]);
+           if(a[i] > vec.back()) {
+               vec.push_back(a[i]);
+               ans++;
            } else {
-               int l = 0;
-               int r = arr.size() - 1;
-               int pos = -1;
-               while(l<=r) {
-                   int m = (l+r)/2;
-                   if(arr[m] >= a[i]) {
-                       pos = m;
-                       r = m - 1;
-                   } else {
-                       l = m + 1;
-                   }
-               }
-               arr[pos] = a[i];
+               int z = lower_bound(vec.begin(), vec.end(), a[i]) - vec.begin();
+               vec[z] = a[i];
            }
-        //   cout<<"AfterInsertion: \n";
-        //   for(int k=0;k<arr.size();k++) {
-        //       cout<<arr[k]<<" ";
-        //   }
-        //   cout<<"\n";
        }
-       
-       return arr.size();
+       return ans;
     }
 };
 
